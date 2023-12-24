@@ -1,8 +1,13 @@
-from datetime import timedelta
+import environ
 import os
+from datetime import timedelta
 from pathlib import Path
 
-from corsheaders.defaults import default_methods, default_headers
+from corsheaders.defaults import default_headers, default_methods
+
+# Configurar env para leer variables de entorno
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,22 +52,27 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Configurar los orígenes aceptados por los cors
 CORS_ALLOW_ALL_ORIGINS = True
 
+# Configurar los métodos aceptados por los cors
 CORS_ALLOW_METHODS = (
     *default_methods,
 )
 
+# Configurar los headers aceptados por los cors
 CORS_ALLOW_HEADERS = (
     *default_headers,
 )
 
+# Configurar la autenticación por simple jwt
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
 
+# Configurar simple jwt para el manejo de la autenticación
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -129,9 +139,18 @@ WSGI_APPLICATION = 'artisan_market.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # MySQL engine. Powered by the mysqlclient module.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('DB_DATABASE'),
+        'USER': env('DB_USERNAME'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
+    #'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+    #}
 }
 
 
