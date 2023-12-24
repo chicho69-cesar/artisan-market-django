@@ -1,0 +1,14 @@
+[MASTER]
+disable=
+    E0401, # Error on imports
+    E1101, # Methos not knowed
+    C0103, # snake case naming
+    C0114, # missing-module-docstring
+    C0115, # missing-class-docstring
+    C0116, # missing-function-docstring
+    C0301, # lines to long
+    R0913, # to many arguments
+    W0105, # more than one multi line comment
+    W0223, # abstract methods override
+    W0511, # no fix me comments
+    W0702, # Define the type of the exeption
