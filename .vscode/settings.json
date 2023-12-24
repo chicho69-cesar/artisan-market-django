@@ -16,6 +16,7 @@
     "cSpell.words": [
         "corsheaders",
         "django",
+        "mysql",
         "simplejwt"
     ]
 }
