@@ -36,3 +36,69 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno local:
   git clone https://github.com/chicho69-cesar/artisan-market-django.git
   cd artisan-market-django
 ```
+
+**Crea un archivo de configuración .env y configura la conexión a la base de datos. Puedes usar el archivo .env.example como plantilla:**
+
+```bash
+cp artisan_market/artisan_market/.env.example artisan_market/artisan_market/.env
+```
+
+**Inicia el entorno de ejecución de Python, para esto ubícate en la carpeta raíz del proyecto y ejecuta el siguiente comando en la terminal:**
+
+```bash
+.\venv\Scripts\activate
+```
+
+**Instala las dependencias del archivo requirements.txt en la carpeta raíz para el entorno de ejecución:**
+
+```bash
+pip install -r requirements.txt
+```
+
+**Entra a la carpeta base del proyecto desde la raíz:**
+
+```bash
+cd artisan_market
+```
+
+**Crea las migraciones si faltan por crear:**
+
+```bash
+py manage.py makemigrations
+```
+
+**Aplica las migraciones para crear las tablas de la base de datos:**
+
+```bash
+py manage.py migrate
+```
+
+**Inicia el servidor de desarrollo:**
+
+```bash
+py manage.py runserver
+```
+
+Accede a la aplicación en tu navegador visitando <http://localhost:8000>
+
+**Inicia el servidor para acceder dentro de una LAN:**
+
+```bash
+py manage.py runserver 0.0.0.0:8000
+```
+
+Accede a la aplicación desde otro dispositivo conectado a la misma red visitando <http://IP:8000>
+
+**¡Importante! Si al momento de ejecutar el servidor aparece un error aunque antes funcionaba correctamente es debido a que se necesita volver a instalar los paquetes en el entorno, por lo que se debe hacer lo siguiente:**
+
+```bash
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+**Si se instala un nuevo paquete en el proyecto es de mucha utilidad agregarlo como dependencia al archivo requirements.txt:**
+
+```bash
+pip freeze
+pip freeze > requirements.txt
+```
